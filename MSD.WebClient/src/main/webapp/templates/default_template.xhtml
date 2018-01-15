@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sp = "http://xmlns.jcp.org/jsf/composite/sprintcomponents">
+	
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css" />
+	<ui:insert name="headPan" />
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+		<p:ajax event="resize" />
+		<p:growl id="messages" showDetail="false"/>
+		
+		<p:layoutUnit position="north">
+			<p:panel header="PrimeFaces Showcase">
+				<h:outputText value="SPRINT.App Header Panel" />
+			</p:panel>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" collapsible="true" gutter="1" >
+			<ui:include src="../views/MenuView.xhtml"/>
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<ui:insert name="bodyContent" />
+		</p:layoutUnit>
+		<p:layoutUnit position="east" collapsible="true" gutter="1">
+			<ui:insert name="rightPan" />
+		</p:layoutUnit>
+		<p:layoutUnit position="south" collapsible="true" gutter="1">
+			<sp:PrimeFacesPanComponent panMessage="SPRINT.App South Panel Component: Status Bar"/>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+
+</html>

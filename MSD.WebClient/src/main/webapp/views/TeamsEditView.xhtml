@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+	<p:layout >
+			<h:form id="form">
+				<p:growl id="messages" showDetail="false" />
+				
+				<p:layoutUnit position="west" resizable="true" size="400">
+					<p:dataTable id="dtTeams" var="team" 
+						value="#{teamViewController.teams}"
+						sortBy="#{team.team_id}" 
+						selectionMode="single" scrollable="true"
+						selection="#{teamViewController.selectedTeam}" 
+						rowKey="#{team.team_id}" >
+						<p:ajax event="rowSelect" listener="#{teamViewController.onRowSelect}" 
+							update=":form:team_id :form:team_name"/>
+						<f:facet name="header"> Team List</f:facet>
+						<p:column headerText="Team ID#" sortBy="#{team.team_id}">
+							<h:outputText value="#{team.team_id}" />
+						</p:column>
+	
+						<p:column headerText="team_name" sortBy="#{team.team_name}">
+							<h:outputText value="#{team.team_name}" />
+						</p:column>
+						
+						<f:facet name="footer">
+							<p:commandButton value="Add..."
+										update="messages dtTeams :form:team_id :form:team_name" 
+										actionListener="#{teamViewController.addNewTeam}"
+										icon="ui-icon-circle-plus" style="margin:0"/>
+							<p:commandButton value="Delete"
+										update="messages dtTeams :form:team_id :form:team_name" 
+										actionListener="#{teamViewController.deleteTeam}"
+										icon="ui-icon-trash" style="margin:0"/>							
+						</f:facet>
+					</p:dataTable>	
+							
+				</p:layoutUnit>
+	
+				<p:layoutUnit id="layout_detail" position="center" resizable="true" >
+					<p:panelGrid columns="2">
+						<f:facet name="header">Team Information</f:facet>
+						<h:outputLabel for="team_id" value="Team#" />
+						<p:inputText id="team_id" 
+							value="#{teamViewController.selectedTeam.team_id}" label="team_id" />
+						<h:outputLabel for="team_name" value="Team Name" />
+						<p:inputText id="team_name" 
+							value="#{teamViewController.selectedTeam.team_name}" label="team_name"/>
+					
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								update="messages dtTeams" actionListener="#{teamViewController.saveSelectedTeam}"
+								icon="ui-icon-check" style="margin:0"/>
+						</f:facet>
+					</p:panelGrid>
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="north">
+					<h:outputText value="List of teams: edit teams details" />
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="south">
+					<h:outputText value="SOUTH" />
+				</p:layoutUnit>
+				
+			</h:form>
+		</p:layout>
+	</ui:define>
+
+</ui:composition>
+</html>

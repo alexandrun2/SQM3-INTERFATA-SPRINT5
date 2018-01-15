@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:sp = "http://xmlns.jcp.org/jsf/composite/sprintcomponents">
+	
+<h:head>
+	<title>Welcome View</title>
+</h:head>
+
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+		<h:outputText value="Welcome Body Panel" />
+	</ui:define>
+
+	<ui:define name="rightPan">
+		<h:outputText value="Welcome Right Panel" />
+	</ui:define>
+	
+</ui:composition>
+</html>

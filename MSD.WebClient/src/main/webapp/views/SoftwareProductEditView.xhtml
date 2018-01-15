@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+	<p:layout >
+			<h:form id="form">
+				<p:growl id="messages" showDetail="false" />
+				
+				<p:layoutUnit position="west" resizable="true" size="400">
+					<p:dataTable id="dtProducts" var="product" 
+						value="#{softwareProductViewController.products}"
+						sortBy="#{product.product_id}" 
+						selectionMode="single" scrollable="true"
+						selection="#{softwareProductViewController.selectedProduct}" 
+						rowKey="#{product.product_id}" >
+						<p:ajax event="rowSelect" listener="#{softwareProductViewController.onRowSelect}" 
+							update=":form:product_id :form:product_name"/>
+						<f:facet name="header"> Software List</f:facet>
+						<p:column headerText="ID#" sortBy="#{product.product_id}">
+							<h:outputText value="#{product.product_id}" />
+						</p:column>
+	
+						<p:column headerText="Name" sortBy="#{product.product_name}">
+							<h:outputText value="#{product.product_name}" />
+						</p:column>
+						
+						<f:facet name="footer">
+							<p:commandButton value="Adauga..."
+										update="messages dtProducts :form:product_id :form:product_name" 
+										actionListener="#{softwareProductViewController.addNewProduct}"
+										icon="ui-icon-circle-plus" style="margin:0"/>
+							<p:commandButton value="Delete"
+										update="messages dtProducts :form:product_id :form:product_name" 
+										actionListener="#{softwareProductViewController.deleteProduct}"
+										icon="ui-icon-trash" style="margin:0"/>							
+						</f:facet>
+					</p:dataTable>	
+							
+				</p:layoutUnit>
+	
+				<p:layoutUnit id="layout_detail" position="center" resizable="true" >
+					<p:panelGrid columns="2">
+						<f:facet name="header">Software Product Information</f:facet>
+						<h:outputLabel for="product_id" value="Product#" />
+						<p:inputText id="product_id" 
+							value="#{softwareProductViewController.selectedProduct.product_id}" label="product_id" />
+						<h:outputLabel for="product_name" value="Software Product Name" />
+						<p:inputText id="product_name" 
+							value="#{softwareProductViewController.selectedProduct.product_name}" label="product_name"/>
+						
+						<f:facet name="footer">
+							<p:commandButton value="Salveaza"
+								update="messages dtProducts" actionListener="#{softwareProductViewController.saveSelectedProduct}"
+								icon="ui-icon-check" style="margin:0"/>
+						</f:facet>
+					</p:panelGrid>
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="north">
+					<h:outputText value="List of software products: edit software details" />
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="south">
+					<h:outputText value="SOUTH" />
+				</p:layoutUnit>
+				
+			</h:form>
+		</p:layout>
+	</ui:define>
+
+</ui:composition>
+</html>

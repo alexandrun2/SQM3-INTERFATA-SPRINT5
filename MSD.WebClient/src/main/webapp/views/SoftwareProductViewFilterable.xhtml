@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+		<h:form>
+			<p:dataTable 
+					var="product" widgetVar="products" 
+					value="#{softwareProductViewController.products}" filteredValue="#{softwareProductViewController.filteredProducts}"
+					sortBy="#{product.product_id}" 
+					style="margin-bottom:40px">
+		        <f:facet name="header">
+		            Project List View: Filterable
+		        </f:facet>
+		        <p:column headerText="ID" sortBy="#{product.product_id}"
+		        		 filterBy="#{product.product_id}" filterMatchMode="contains" footerText="contains">
+		            <h:outputText value="#{product.product_id}" />
+		        </p:column>
+		        
+				<p:column headerText="Software Name" sortBy="#{product.product_name}"
+						filterBy="#{product.product_name}" filterMatchMode="contains" footerText="contains">
+		            <h:outputText value="#{product.product_name}" />
+		        </p:column>	 
+		        
+		      
+		    </p:dataTable>      
+	    </h:form>
+	</ui:define>
+
+	<ui:define name="rightPan">
+		<h:outputText value="ProjectsListView Right Panel" />
+	</ui:define>
+
+</ui:composition>
+</html>

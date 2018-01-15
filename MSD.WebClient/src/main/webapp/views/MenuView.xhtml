@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<title>Menu View</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:panelMenu style="width:200px">
+			<p:submenu label="Software Products">
+				<p:submenu label="Software Products Info">
+					<p:menuitem value="Software Product List" action="/views/SoftwareProductViewFilterable.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/SoftwareProductViewFilterable.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+					<p:menuitem value="Software Product Edit" action="/views/SoftwareProductEditView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/SoftwareProductEditView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-pencil" />
+				</p:submenu>
+				
+					
+			</p:submenu>
+			
+			
+						<p:submenu label="Echipe">
+				<p:submenu label="Teams Info">
+					<p:menuitem value="Team List" action="/views/TeamsListViewFilterable.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/TeamsListViewFilterable.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+					<p:menuitem value="Teams Edit" action="/views/TeamsEditView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/TeamsEditView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-pencil" />
+				</p:submenu>
+				
+					
+			</p:submenu>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+					<p:submenu label="Employee Teams">
+					<p:menuitem value="Team - Employees Simple" action="/views/ProjectReleasesListView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/ProjectReleasesListView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+					<p:menuitem value="Team - Employees Edit" action="/views/ProjectReleasesEditView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/ProjectReleasesEditView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+					<p:menuitem value="Team - Employees Row Edit" action="/views/ProjectReleasesRowEditView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/ProjectReleasesRowEditView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+					<p:menuitem value="Team-Employees Filterable" action="/views/ProjectsReleaseListView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/ProjectsReleaseListView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" 
+						actionListener="#{menuViewController.showFilterableProjects}" update="messages"/>
+				</p:submenu>
+				
+				
+				
+				
+				
+				
+				
+				
+			
+			
+			
+			
+			
+			<p:submenu label="TEST MESAJ">
+				<p:menuitem value="ARATA MESAJ" ajax="false" icon="ui-icon-info"
+					action="/welcome.xhtml"
+					actionListener="#{softwareProductViewController.showMe}" update="messages" />
+			</p:submenu>
+			<p:submenu label="Primefaces Links">
+					<p:submenu label="Prime Resources">
+						<p:menuitem value="Demo" icon="ui-icon-clipboard"
+							url="https://www.primefaces.org/showcase/" />
+							
+						<p:menuitem value="Docs" icon="ui-icon-document"
+							url="http://primefaces.org/documentation.html" />
+	
+						<p:menuitem value="Download" icon="ui-icon-arrowthick-1-s"
+							url="http://primefaces.org/downloads.html" />
+					</p:submenu>
+					<p:submenu label="Prime Products">
+						<p:menuitem value="Prime UI" icon="ui-icon-home"
+							url="http://primefaces.org/primeui" />
+						<p:menuitem value="Prime Mobile" icon="ui-icon-signal"
+							url="http://primefaces.org/showcase/mobile/index.xhtml" />
+					</p:submenu>
+				</p:submenu>			
+			<p:separator/>
+			
+		</p:panelMenu>
+		
+		
+	</h:form>
+
+</h:body>
+</html>

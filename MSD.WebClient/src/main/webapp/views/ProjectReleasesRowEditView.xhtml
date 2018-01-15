@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+		<h:form id="editForm">
+			<p:growl id="messages" showDetail="false" />
+	
+			<p:panelGrid columns="1">		
+				<p:panelGrid columns="2">
+					<f:facet name="header">Team Information</f:facet>
+					<h:outputLabel for="team_id" value="Team#" />
+					<p:inputText id="team_id" 
+						value="#{teamViewController.selectedTeam.team_id}" label="team_id" />
+					<h:outputLabel for="team_name" value="Team Name" />
+					<p:inputText id="team_name" 
+						value="#{teamViewController.selectedTeam.team_name}" label="team_name"/>
+					
+					<f:facet name="footer">
+						<p:commandButton value="Save"
+							update="messages" actionListener="#{teamViewController.saveSelectedTeam}"
+							icon="ui-icon-check" style="margin:0"/>
+					</f:facet>
+				</p:panelGrid>
+				
+				<p:dataTable id="dtTeam" var="employee" value="#{teamViewController.selectedTeam.employee}" 
+						editable="true" editMode="cell" widgetVar="cellRelease"
+						sortBy="#{employee.id_User}"
+						style="margin-bottom:40px">
+			        <f:facet name="header">
+			            Employee Row-Editable and List-Sortable
+			        </f:facet>
+			        <p:ajax event="cellEdit" listener="#{teamViewController.onCellEdit}" update=":editForm:messages" />
+			         
+			        <p:column headerText="Employee ID" sortBy="#{employee.id_User}">
+			            <p:cellEditor>
+                  			<f:facet name="output">
+                  				<h:outputText value="#{employee.id_User}" />
+                  			</f:facet>
+                  			<f:facet name="input">
+                  				<p:inputText value="#{employee.id_User}" style="width:96%"/>
+                  			</f:facet>
+              			</p:cellEditor>
+			        </p:column>
+			        
+					<p:column headerText="USERID" sortBy="#{employee.user_name}">
+			            <p:cellEditor>
+                  			<f:facet name="output">
+                  				<h:outputText value="#{employee.user_name}" />
+                  			</f:facet>
+                  			<f:facet name="input">
+                  				<p:inputText value="#{employee.user_name}" style="width:96%"/>
+                  			</f:facet>
+              			</p:cellEditor>
+			        </p:column>	 
+			        
+			        <p:column headerText="Role" sortBy="#{employee.role}">
+			            <p:cellEditor>
+                  			<f:facet name="output">
+                  				<h:outputText value="#{employee.role}" />
+                  			</f:facet>
+                  			<f:facet name="input">
+                  				<p:inputText value="#{employee.role}" style="width:96%"/>
+                  			</f:facet>
+              			</p:cellEditor>
+			        </p:column>	 
+			        
+			        <p:column headerText="FirstName" sortBy="#{employee.first_name}">
+			            <p:cellEditor>
+                  			<f:facet name="output">
+                  				<h:outputText value="#{employee.first_name}" />
+                  			</f:facet>
+                  			<f:facet name="input">
+                  				<p:inputText value="#{employee.first_name}" style="width:96%"/>
+                  			</f:facet>
+              			</p:cellEditor>
+			        </p:column>	 
+			        
+			            <p:column headerText="LastName" sortBy="#{employee.last_name}">
+			            <p:cellEditor>
+                  			<f:facet name="output">
+                  				<h:outputText value="#{employee.last_name}" />
+                  			</f:facet>
+                  			<f:facet name="input">
+                  				<p:inputText value="#{employee.last_name}" style="width:96%"/>
+                  			</f:facet>
+              			</p:cellEditor>
+			        </p:column>	 
+			        
+			       
+		    		</p:dataTable>  
+				
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
