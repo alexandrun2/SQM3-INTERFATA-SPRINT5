@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+		<h:form id="listForm">
+			<p:dataTable style="margin-bottom:40px" var="team"
+				value="#{warrantyViewController.warranties}">
+
+				<f:facet name="header">
+		            Team List Form Simple
+		        </f:facet>
+
+				<p:column style="width:32px;text-align: center">
+					<p:commandButton icon="ui-icon-pencil" title="View" ajax="false"
+						action="/views/WarrantyIssuesEditView.xhtml">
+						<f:setPropertyActionListener value="#{project}"
+							target="#{warrantyViewController.selectedWarranty}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Warranty#">
+					<h:outputText value="#{warranty.warranty_id}" />
+				</p:column>
+
+				<p:column headerText="Description">
+					<h:outputText value="#{warranty.description}" />
+				</p:column>
+
+				<p:column headerText="date_created">
+					<h:outputText value="#{warranty.date_created}" />
+				</p:column>
+				
+				<p:column headerText="license_key">
+					<h:outputText value="#{warranty.license_key}" />
+				</p:column>
+				
+				<p:column headerText="valability">
+					<h:outputText value="#{warranty.valability}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

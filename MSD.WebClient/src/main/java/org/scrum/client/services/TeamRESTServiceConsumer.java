@@ -1,7 +1,9 @@
 package org.scrum.client.services;
 
-import static org.junit.Assert.assertNotNull;
 
+
+
+import static org.junit.Assert.assertNotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;

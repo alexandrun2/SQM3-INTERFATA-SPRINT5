@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+	<p:layout >
+			<h:form id="form">
+				<p:growl id="messages" showDetail="false" />
+				
+				<p:layoutUnit position="west" resizable="true" size="400">
+					<p:dataTable id="dtWarranties" var="warranty" 
+						value="#{warrantyViewController.warranties}"
+						sortBy="#{warranty.warranty_id}" 
+						selectionMode="single" scrollable="true"
+						selection="#{warrantyViewController.selectedWarranty}" 
+						rowKey="#{warranty.warranty_id}" >
+						<p:ajax event="rowSelect" listener="#{warrantyViewController.onRowSelect}" 
+							update=":form:warranty_id :form:description :form:license_key :form:valability :form:date_created"/>
+						<f:facet name="header"> Warranty List</f:facet>
+						<p:column headerText="WarrantyID#" sortBy="#{warranty.warranty_id}">
+							<h:outputText value="#{warranty.warranty_id}" />
+						</p:column>
+	
+						<p:column headerText="Descriere" sortBy="#{warranty.description}">
+							<h:outputText value="#{warranty.description}" />
+						</p:column>
+						
+						<f:facet name="footer">
+							<p:commandButton value="Add..."
+										update="messages dtWarranties :form:warranty_id :form:description :form:license_key :form:valability :form:date_created" 
+										actionListener="#{warrantyViewController.addNewWarranty}"
+										icon="ui-icon-circle-plus" style="margin:0"/>
+							<p:commandButton value="Delete"
+										update="messages dtWarranties :form:warranty_id :form:description :form:license_key :form:valability :form:date_created" 
+										actionListener="#{warrantyViewController.deleteWarranty}"
+										icon="ui-icon-trash" style="margin:0"/>							
+						</f:facet>
+					</p:dataTable>	
+							
+				</p:layoutUnit>
+	
+				<p:layoutUnit id="layout_detail" position="center" resizable="true" >
+					<p:panelGrid columns="2">
+						<f:facet name="header">Warranty Information</f:facet>
+						<h:outputLabel for="warranty_id" value="Warranty#" />
+						<p:inputText id="warranty_id" 
+							value="#{warrantyViewController.selectedWarranty.warranty_id}" label="warranty_id" />
+						<h:outputLabel for="description" value="WarrantyDescription" />
+						<p:inputText id="description" 
+							value="#{warrantyViewController.selectedWarranty.description}" label="description"/>
+							
+						<h:outputLabel for="license_key" value="license_key" />
+						<p:inputText id="license_key" 
+							value="#{warrantyViewController.selectedWarranty.license_key}" label="license_key"/>
+						<h:outputLabel for="valability" value="valability" />
+						<p:inputText id="valability" 
+							value="#{warrantyViewController.selectedWarranty.valability}" label="valability"/>	
+						
+						
+						
+						<h:outputLabel for="date_created" value="date_created" />
+						<p:calendar id="date_created" pattern="dd/MM/yyyy" showOn="button" 
+							value="#{warrantyViewController.selectedWarranty.date_created}" label="date_created"/>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								update="messages dtWarranties" actionListener="#{warrantyViewController.saveSelectedWarranty}"
+								icon="ui-icon-check" style="margin:0"/>
+						</f:facet>
+					</p:panelGrid>
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="north">
+					<h:outputText value="List of warranties: edit warranties details" />
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="south">
+					<h:outputText value="SOUTH" />
+				</p:layoutUnit>
+				
+			</h:form>
+		</p:layout>
+	</ui:define>
+
+</ui:composition>
+</html>

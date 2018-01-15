@@ -69,6 +69,27 @@
 				
 				
 				
+			<p:submenu label="Warranties">
+				<p:submenu label="Warranties Info">
+					<p:menuitem value="Warranties List" action="/views/WarrantyListViewFilterable.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/WarrantyListViewFilterable.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+					<p:menuitem value="Warranties Edit" action="/views/WarrantyEditView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/WarrantyEditView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-pencil" />
+				</p:submenu>
+				
+				</p:submenu>	
+				
+				
+					<p:submenu label="Warranty Issues">
+					<p:menuitem value="Warranty Issues Simple" action="/views/WarrantyIssuesListView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/WarrantyIssuesListView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+					<p:menuitem value="Warranty Issues Edit" action="/views/WarrantyIssuesEditView.xhtml" ajax="false" 
+						styleClass="#{view.viewId == '/views/WarrantyIssuesEditView.xhtml' ? 'ui-state-active' : ''}"
+						icon="ui-icon-info" />
+				</p:submenu>
 				
 				
 				

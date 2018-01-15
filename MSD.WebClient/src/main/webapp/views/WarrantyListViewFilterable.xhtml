@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+		<h:form>
+			<p:dataTable 
+					var="warranty" widgetVar="warranties" 
+					value="#{warrantyViewController.warranties}" filteredValue="#{warrantyViewController.filteredWarranties}"
+					sortBy="#{warranty.warranty_id}" 
+					style="margin-bottom:40px">
+		        <f:facet name="header">
+		            Warranty List View: Filterable
+		        </f:facet>
+		        <p:column headerText="WarrantyIDt#" sortBy="#{warranty.warranty_id}"
+		        		 filterBy="#{warranty.warranty_id}" filterMatchMode="contains" footerText="contains">
+		            <h:outputText value="#{warranty.warranty_id}" />
+		        </p:column>
+		        
+				<p:column headerText="Descriere" sortBy="#{warranty.description}"
+						filterBy="#{warranty.description}" filterMatchMode="contains" footerText="contains">
+		            <h:outputText value="#{warranty.description}" />
+		        </p:column>	 
+		        
+		        <p:column headerText="LicenceKey" sortBy="#{warranty.license_key}"
+						filterBy="#{warranty.license_key}" filterMatchMode="contains" footerText="contains">
+		            <h:outputText value="#{warranty.license_key}" />
+		        </p:column>	 
+		        
+		          <p:column headerText="Valability-YEARS" sortBy="#{warranty.valability}"
+						filterBy="#{warranty.valability}" filterMatchMode="contains" footerText="contains">
+		            <h:outputText value="#{warranty.valability}" />
+		        </p:column>	 
+		        
+		        <p:column headerText="DateCreated" sortBy="#{warranty.date_created}"
+		        		filterBy="#{warranty.date_created}" filterFunction="#{warrantyViewController.filterByDate}" 
+		        		footerText="equals truncate">
+		        	<f:facet name="filter">
+		        		<p:calendar pattern="dd/MM/yyyy" showOn="button" >
+		        			<p:ajax event="dateSelect"  oncomplete="PF('warranties').filter()"/>
+		        		</p:calendar>
+		        	</f:facet>
+		            <h:outputText value="#{warranty.date_created}">
+		            	<f:convertDateTime pattern="dd/MM/yyyy" />
+		            </h:outputText>
+		        </p:column>        
+		    </p:dataTable>      
+	    </h:form>
+	</ui:define>
+
+	<ui:define name="rightPan">
+		<h:outputText value="WarrantiesListView Right Panel" />
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<ui:composition template="/templates/default_template.xhtml">
+	<ui:define name="head">
+		<!-- Test contents Comment Head-->
+	</ui:define>
+
+	<ui:define name="bodyContent">
+		<h:form id="editForm">
+			<p:growl id="messages" showDetail="false" />
+	
+			<p:panelGrid columns="1">		
+				<p:panelGrid columns="2">
+					<f:facet name="header">Warranty Info</f:facet>
+								<h:outputLabel for="warranty_id" value="Warranty#" />
+						<p:inputText id="warranty_id" 
+							value="#{warrantyViewController.selectedWarranty.warranty_id}" label="warranty_id" />
+						<h:outputLabel for="description" value="WarrantyDescription" />
+						<p:inputText id="description" 
+							value="#{warrantyViewController.selectedWarranty.description}" label="description"/>
+							
+						<h:outputLabel for="license_key" value="license_key" />
+						<p:inputText id="license_key" 
+							value="#{warrantyViewController.selectedWarranty.license_key}" label="license_key"/>
+						<h:outputLabel for="valability" value="valability" />
+						<p:inputText id="valability" 
+							value="#{warrantyViewController.selectedWarranty.valability}" label="valability"/>	
+						
+						
+						
+						<h:outputLabel for="date_created" value="date_created" />
+						<p:calendar id="date_created" pattern="dd/MM/yyyy" showOn="button" 
+							value="#{warrantyViewController.selectedWarranty.date_created}" label="date_created"/>
+						
+					<f:facet name="footer">
+						<p:commandButton value="Save"
+							update="messages" actionListener="#{warrantyViewController.saveSelectedWarranty}"
+							icon="ui-icon-check" style="margin:0"/>
+					</f:facet>
+				</p:panelGrid>
+				
+				<p:dataTable var="issue" value="#{warrantyViewController.selectedWarranty.warranty_issues}" 
+						sortBy="#{issue.issue_id}"
+						style="margin-bottom:40px">
+			        <f:facet name="header">
+			           WarrantyIssues List: Sortable
+			        </f:facet>
+			        <p:column headerText="issue_id" sortBy="#{issue.issue_id}">
+			            <h:outputText value="#{issue.issue_id}" />
+			        </p:column>
+			        
+					<p:column headerText="issue_details" sortBy="#{issue.issue_details}">
+			            <h:inputText value="#{issue_details}" />
+			        </p:column>	 
+			        
+			        <p:column headerText="status" sortBy="#{issue.status}">
+			            <h:inputText value="#{issue.status}" />
+			        </p:column>	 
+			        
+			        <p:column headerText="issue_date" sortBy="#{issue.issue_date}">
+			            <p:calendar value="#{issue.issue_date}" pattern="dd/MM/yyyy" showOn="button" />
+			        </p:column>        
+		    		</p:dataTable>  
+				
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
